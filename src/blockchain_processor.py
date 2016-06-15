@@ -232,14 +232,10 @@ class BlockchainProcessor(Processor):
 
         self.flush_headers()
 
-<<<<<<< HEAD
     @staticmethod
-    def hash_header(header):
-        return rev_hex(Hash(header_to_string(header).decode('hex')).encode('hex'))
-=======
     def hash_header(self, header):
+#        return rev_hex(Hash(header_to_string(header).decode('hex')).encode('hex'))
         return rev_hex(HashX11(header_to_string(header).decode('hex')).encode('hex'))
->>>>>>> x11hash
 
     def read_header(self, block_height):
         if os.path.exists(self.headers_filename):
