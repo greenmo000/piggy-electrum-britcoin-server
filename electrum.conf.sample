@@ -20,6 +20,11 @@ banner_file = /etc/electrum.banner
 logfile = /var/log/electrum.log
 donation_address =
 
+[network]
+pubkey_address = 118
+script_address = 28
+genesis_hash = 00000561d6f5f76b0c101ba6bac27ad99a18fc8927c6af844adfd913097e9271
+
 [leveldb]
 # path to your database
 path =
@@ -34,7 +39,7 @@ pruning_limit = 100
 
 [bitcoind]
 bitcoind_host = localhost
-bitcoind_port = 8332
+bitcoind_port = 54480
 # user and password from bitcoin.conf
-bitcoind_user =
-bitcoind_password =
+bitcoind_user = piggycoinrpc
+bitcoind_password = Testing123
