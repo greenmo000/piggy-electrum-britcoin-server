@@ -30,8 +30,9 @@ import sys
 import time
 import threading
 import urllib
-from calendar import timegm
-from time import strptime
+#from calendar import timegm
+#from time import strptime
+#from datetime import datetime
 import deserialize
 from processor import Processor, print_log
 from storage import Storage
@@ -182,7 +183,8 @@ class BlockchainProcessor(Processor):
             "version": b.get('version'),
             "prev_block_hash": b.get('previousblockhash'),
             "merkle_root": b.get('merkleroot'),
-            "timestamp": timegm(strptime(b.get('time'), "%Y-%m-%d %H:%M:%S %Z")),
+#            "timestamp": timegm(strptime(datetime.fromtimestamp(b.get('time')), "%Y-%m-%d %H:%M:%S %Z")),
+            "timestamp": b.get('time'),
             "bits": int(b.get('bits'), 16),
             "nonce": b.get('nonce'),
         }
