@@ -26,21 +26,23 @@ import threading
 import time
 import hashlib
 import struct
+import sys
+import x11_hash
 
 __b58chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
 __b58base = len(__b58chars)
 
 global PUBKEY_ADDRESS
 global SCRIPT_ADDRESS
-PUBKEY_ADDRESS = 0
-SCRIPT_ADDRESS = 5
+PUBKEY_ADDRESS = 118
+SCRIPT_ADDRESS = 28
 
 def rev_hex(s):
     return s.decode('hex')[::-1].encode('hex')
 
 
 Hash = lambda x: hashlib.sha256(hashlib.sha256(x).digest()).digest()
-
+HashX11 = lambda x: x11_hash.getPoWHash(x)
 
 hash_encode = lambda x: x[::-1].encode('hex')
 
@@ -135,7 +137,7 @@ def hash_160_to_script_address(h160):
     return hash_160_to_address(h160, SCRIPT_ADDRESS)
 
 
-def hash_160_to_address(h160, addrtype = 0):
+def hash_160_to_address(h160, addrtype = 118):
     """ Checks if the provided hash is actually 160bits or 20 bytes long and returns the address, else None
     """
     if h160 is None or len(h160) is not 20:

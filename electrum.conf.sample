@@ -2,7 +2,7 @@
 # username for running the daemon
 username =
 # hostname. set it to a FQDN in order to be reached from outside
-host = localhost
+host = 0.0.0.0
 # ports
 electrum_rpc_port = 8000
 stratum_tcp_port = 50001
@@ -10,7 +10,7 @@ stratum_tcp_port = 50001
 #report_host =
 #report_stratum_tcp_port = 50001
 #report_stratum_tcp_ssl_port = 50002
-banner = Welcome to Electrum!
+banner = Welcome to PiggyElectrum!
 banner_file = /etc/electrum.banner
 #irc = no
 #irc_nick = <yournickname>
@@ -19,6 +19,12 @@ banner_file = /etc/electrum.banner
 #ssl_keyfile = /path/to/electrum-server.key
 logfile = /var/log/electrum.log
 donation_address =
+
+[network]
+type = piggycoin_main
+pubkey_address = 118
+script_address = 28
+genesis_hash = 00000561d6f5f76b0c101ba6bac27ad99a18fc8927c6af844adfd913097e9271
 
 [leveldb]
 # path to your database
@@ -34,7 +40,7 @@ pruning_limit = 100
 
 [bitcoind]
 bitcoind_host = localhost
-bitcoind_port = 8332
+bitcoind_port = 54480
 # user and password from bitcoin.conf
-bitcoind_user =
-bitcoind_password =
+bitcoind_user = piggycoinrpc
+bitcoind_password = Testing123

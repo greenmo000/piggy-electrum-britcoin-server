@@ -30,12 +30,16 @@ import sys
 import time
 import threading
 import urllib
-
+#from calendar import timegm
+#from time import strptime
+#from datetime import datetime
 import deserialize
 from processor import Processor, print_log
 from storage import Storage
-from utils import logger, hash_decode, hash_encode, Hash, header_from_string, header_to_string, ProfiledThread, \
+from utils import logger, hash_decode, hash_encode, Hash, HashX11, header_from_string, header_to_string, ProfiledThread, \
     rev_hex, int_to_hex4
+
+import traceback
 
 class BlockchainProcessor(Processor):
 
@@ -179,6 +183,7 @@ class BlockchainProcessor(Processor):
             "version": b.get('version'),
             "prev_block_hash": b.get('previousblockhash'),
             "merkle_root": b.get('merkleroot'),
+#            "timestamp": timegm(strptime(datetime.fromtimestamp(b.get('time')), "%Y-%m-%d %H:%M:%S %Z")),
             "timestamp": b.get('time'),
             "bits": int(b.get('bits'), 16),
             "nonce": b.get('nonce'),
@@ -231,7 +236,8 @@ class BlockchainProcessor(Processor):
 
     @staticmethod
     def hash_header(header):
-        return rev_hex(Hash(header_to_string(header).decode('hex')).encode('hex'))
+#        return rev_hex(Hash(header_to_string(header).decode('hex')).encode('hex'))
+        return rev_hex(HashX11(header_to_string(header).decode('hex')).encode('hex'))
 
     def read_header(self, block_height):
         if os.path.exists(self.headers_filename):
@@ -393,6 +399,7 @@ class BlockchainProcessor(Processor):
                 tx = deserialize.parse_Transaction(vds, is_coinbase)
             except:
                 print_log("ERROR: cannot parse", tx_hash)
+                print_log(traceback.format_exc())
                 continue
             tx_hashes.append(tx_hash)
             txdict[tx_hash] = tx
@@ -424,7 +431,7 @@ class BlockchainProcessor(Processor):
                 undo = undo_info.pop(txid)
                 self.storage.revert_transaction(txid, tx, block_height, touched_addr, undo)
 
-        if revert: 
+        if revert:
             assert undo_info == {}
 
         # add undo info
