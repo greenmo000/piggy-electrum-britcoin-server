@@ -1,6 +1,6 @@
 [server]
 # username for running the daemon
-username =
+username = electrum
 # hostname. set it to a FQDN in order to be reached from outside
 host = 0.0.0.0
 # ports
@@ -10,7 +10,7 @@ stratum_tcp_port = 50001
 #report_host =
 #report_stratum_tcp_port = 50001
 #report_stratum_tcp_ssl_port = 50002
-banner = Welcome to PiggyElectrum!
+banner = Welcome to BritElectrum!
 banner_file = /etc/electrum.banner
 #irc = no
 #irc_nick = <yournickname>
@@ -21,16 +21,17 @@ logfile = /var/log/electrum.log
 donation_address =
 
 [network]
-type = piggycoin_main
-pubkey_address = 118
-script_address = 28
-genesis_hash = 00000561d6f5f76b0c101ba6bac27ad99a18fc8927c6af844adfd913097e9271
+type = britcoin_main
+pubkey_address = 25
+script_address = 85
+# those were from src/base58.h of the main britcoin wallet
+genesis_hash = 00000c2cafe160374ffe5b516a2d2c83d7d13cf4e910dee00dd4fc2f7fa9c7cf
 
 [leveldb]
 # path to your database
-path =
+path = /var/electrum-britcoin-server
 # for each address, history will be pruned if it is longer than this limit
-pruning_limit = 100
+pruning_limit = 10000
 
 # cache sizes in bytes, the default is optimized for ~4 GB RAM setups to run bitcoind alongside
 # If you have lots of RAM increase up to 16 times for best performance
@@ -40,7 +41,7 @@ pruning_limit = 100
 
 [bitcoind]
 bitcoind_host = localhost
-bitcoind_port = 54480
+bitcoind_port = 9198
 # user and password from bitcoin.conf
-bitcoind_user = piggycoinrpc
+bitcoind_user = britcoinrpc
 bitcoind_password = Testing123

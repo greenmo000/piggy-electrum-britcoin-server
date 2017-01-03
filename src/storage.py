@@ -41,7 +41,7 @@ Patricia tree for hashing unspents
 
 # increase this when database needs to be updated
 global GENESIS_HASH
-GENESIS_HASH = '00000561d6f5f76b0c101ba6bac27ad99a18fc8927c6af844adfd913097e9271'
+GENESIS_HASH = '00000c2cafe160374ffe5b516a2d2c83d7d13cf4e910dee00dd4fc2f7fa9c7cf'
 DB_VERSION = 3
 KEYLENGTH = 56   # 20 + 32 + 4
 
